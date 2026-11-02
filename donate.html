@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Donate | Maxified</title>
+<meta name="description" content="Support Maxified with a donation and get a free emoji sticker as a thank-you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f1e8d8;--ink:#2a1512;--red:#d4261f;--card:#fff;--muted:#6b5650;--line:#d9cbb4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#1d1210;--ink:#f1e8d8;--card:#2a1a17;--muted:#b9a79a;--line:#43302b;--red:#ef4a3f}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{max-width:640px;margin:0 auto;padding:0 22px 56px}
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font-weight:800;font-size:22px;letter-spacing:-.02em;text-decoration:none}
+.logo b{color:var(--red)}
+.back{font-weight:600;font-size:15px;text-decoration:none}
+h1{font-size:clamp(36px,9vw,56px);line-height:1;letter-spacing:-.04em;font-weight:800;margin:20px 0 12px}
+h1 span{color:var(--red)}
+.lead{color:var(--muted);margin:0 0 28px}
+.box{background:var(--card);border-radius:10px;padding:24px;border:2px solid var(--line)}
+.amts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.amt{padding:14px 0;border-radius:8px;border:2px solid var(--line);background:transparent;color:var(--ink);font:inherit;font-weight:800;font-size:19px;cursor:pointer;transition:transform .15s,background .2s,border-color .2s,color .2s}
+.amt:hover{transform:translateY(-2px)}
+.amt[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;transform:scale(1.06)}
+label{display:block;font-weight:600;font-size:15px}
+input{width:100%;margin-top:6px;padding:13px 14px;border-radius:6px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:20px;font-weight:600}
+input:focus{border-color:var(--red);outline:none}
+.preview{display:flex;align-items:center;gap:14px;margin:20px 0;padding:14px;border-radius:8px;background:var(--bg)}
+.preview .em{font-size:44px;line-height:1;transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.preview .em.pop{transform:scale(1.35) rotate(-8deg)}
+.preview p{margin:0;font-size:15px;color:var(--muted)}
+.btn{display:inline-block;background:var(--red);color:#fff;padding:15px 26px;border-radius:999px;font:inherit;font-weight:600;border:0;cursor:pointer;text-decoration:none;text-align:center}
+.btn:hover{filter:brightness(1.1)}
+.btn.full{width:100%}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.err{color:var(--red);font-weight:600;margin:12px 0 0;min-height:1.4em}
+.small{font-size:14px;color:var(--muted);margin:14px 0 0}
+#thanks{text-align:center;margin-top:24px}
+#thanks h2{font-size:30px;letter-spacing:-.03em;margin:0 0 6px}
+#thanks canvas{width:min(300px,80%);height:auto;margin:14px auto;display:block;animation:drop .7s cubic-bezier(.3,1.5,.5,1)}
+#thanks .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+@keyframes drop{from{transform:translateY(-60px) rotate(-14deg) scale(.5);opacity:0}to{transform:none;opacity:1}}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.amt,.preview .em,#thanks canvas{transition:none;animation:none}.amt[aria-pressed="true"]{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<a class="logo" href="index.html">Maxified<b>.</b></a>
+<a class="back" href="index.html">Back to site</a>
+</header>
+
+<main>
+<h1>Support <span>Maxified.</span></h1>
+<p class="lead">Enjoy our work? Chip in any amount and take home a free sticker as a thank-you.</p>
+
+<div class="box">
+<div class="amts" role="group" aria-label="Choose an amount">
+<button type="button" class="amt" data-a="5">$5</button>
+<button type="button" class="amt" data-a="10" aria-pressed="true">$10</button>
+<button type="button" class="amt" data-a="20">$20</button>
+<button type="button" class="amt" data-a="50">$50</button>
+</div>
+<label for="amount">Or type your own amount ($)</label>
+<input id="amount" type="number" inputmode="decimal" min="1" step="1" value="10">
+
+<div class="preview">
+<span class="em" id="em" aria-hidden="true">❤️</span>
+<p id="tier">Your sticker: Heart</p>
+</div>
+
+<button class="btn full" id="go" type="button">Donate $10</button>
+<p class="err" id="err" role="alert"></p>
+<p class="small">You’ll finish the payment securely on PayPal in a new tab. Your sticker appears here right after you tap Donate.</p>
+</div>
+
+<div id="thanks" hidden>
+<h2>Thank you!</h2>
+<p class="lead" style="margin-bottom:0">Here’s your sticker. Save it and use it anywhere.</p>
+<canvas id="cv" width="600" height="600" role="img" aria-label="Your thank-you sticker"></canvas>
+<div class="row">
+<button class="btn" id="dl" type="button">Download sticker</button>
+<a class="btn alt" href="index.html">Back to site</a>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+(function(){
+// 1) Put your PayPal.me name here (the part after paypal.me/). Example: 'maxified'
+var PAYPAL_NAME='YOUR_PAYPAL_NAME';
+// 2) Currency code for the amount, e.g. USD, EUR, GBP, INR
+var CURRENCY='USD';
+
+var amtBtns=document.querySelectorAll('.amt'),input=document.getElementById('amount'),
+go=document.getElementById('go'),err=document.getElementById('err'),em=document.getElementById('em'),
+tier=document.getElementById('tier'),thanks=document.getElementById('thanks'),cv=document.getElementById('cv'),dl=document.getElementById('dl');
+
+function pick(a){
+ if(a<5)return{e:'😊',n:'Smile',m:'thank you!'};
+ if(a<20)return{e:'❤️',n:'Heart',m:'much love!'};
+ if(a<50)return{e:'🔥',n:'Fire',m:'you rock!'};
+ return{e:'🏆',n:'Trophy',m:'legend!'};
+}
+function val(){var v=parseFloat(input.value);return isFinite(v)?v:0;}
+function fmt(v){return (Math.round(v*100)/100).toString();}
+function refresh(){
+ var v=val(),t=pick(v);
+ if(em.textContent!==t.e){em.textContent=t.e;em.classList.add('pop');setTimeout(function(){em.classList.remove('pop');},300);}
+ tier.textContent='Your sticker: '+t.n;
+ go.textContent=v>0?'Donate $'+fmt(v):'Donate';
+ for(var i=0;i<amtBtns.length;i++){amtBtns[i].setAttribute('aria-pressed',parseFloat(amtBtns[i].getAttribute('data-a'))===v?'true':'false');}
+}
+for(var i=0;i<amtBtns.length;i++){amtBtns[i].addEventListener('click',function(){input.value=this.getAttribute('data-a');err.textContent='';refresh();});}
+input.addEventListener('input',function(){err.textContent='';refresh();});
+
+function drawSticker(t){
+ var c=cv.getContext('2d'),W=600,cx=300,cy=300;
+ c.clearRect(0,0,W,W);
+ c.save();c.shadowColor='rgba(0,0,0,.25)';c.shadowBlur=18;c.shadowOffsetY=8;
+ c.fillStyle='#fff';c.beginPath();c.arc(cx,cy,285,0,Math.PI*2);c.fill();c.restore();
+ c.fillStyle='#d4261f';c.beginPath();c.arc(cx,cy,254,0,Math.PI*2);c.fill();
+ c.fillStyle='#f1e8d8';c.beginPath();c.arc(cx,cy,222,0,Math.PI*2);c.fill();
+ c.textAlign='center';c.textBaseline='middle';
+ c.font='230px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+ c.fillStyle='#2a1512';c.fillText(t.e,cx,cy-30);
+ c.font='800 54px "Bricolage Grotesque",system-ui,sans-serif';
+ c.fillStyle='#2a1512';c.fillText(t.m,cx,cy+140);
+}
+
+go.addEventListener('click',function(){
+ var v=val();
+ if(v<1){err.textContent='Please enter an amount of at least $1.';return;}
+ var t=pick(v);
+ drawSticker(t);
+ thanks.hidden=false;
+ thanks.scrollIntoView({behavior:'smooth',block:'center'});
+ if(PAYPAL_NAME==='YOUR_PAYPAL_NAME'){err.textContent='Payments are not set up yet. The site owner needs to add a PayPal name.';return;}
+ window.open('https://www.paypal.me/'+encodeURIComponent(PAYPAL_NAME)+'/'+fmt(v)+CURRENCY,'_blank','noopener');
+});
+dl.addEventListener('click',function(){
+ var a=document.createElement('a');
+ a.download='maxified-sticker.png';a.href=cv.toDataURL('image/png');
+ document.body.appendChild(a);a.click();a.remove();
+});
+refresh();
+})();
+</script>
+</body>
+</html>
